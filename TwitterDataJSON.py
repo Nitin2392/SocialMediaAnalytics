@@ -1,17 +1,15 @@
 import json
-import pandas as pd
-import matplotlib.pyplot as plt
+from tweepy import Cursor
+from TwitterMining import get_twitter_client
 
-read_twitter_data = 'C:/Users/Nitin Rangarajan/PycharmProjects/SocialMediaAnalytics/Twitter_data.txt'
+if __name__ == '__main__':
+    client = get_twitter_client()
 
-tweets_data = []
-tweets_file = open(read_twitter_data, "r")
-for line in tweets_file:
-    try:
-        tweets = json.loads(line)
-        tweets_data.append(tweets)
-    except:
-        continue
+    for status in Cursor(client.home_timeline).items(20):
+        print(status.text) #prints latest 20 tweets/ retweets        )
 
-print("Here")
-print(tweets_data)
+    for page in Cursor(client.home_timeline, count=200).pages(4):
+        for status in page:
+            file = open("Twitter_data.jsonl", "w")
+            file.write(json.dumps(status._json) + "\n")
+            file.close()
