@@ -6,10 +6,10 @@ from tweepy import API
 
 # Personalized access tokens for obtaining data from Twitter
 def get_twitter_data():
-    access_token = "2606854082-5nqGfM0ywkbzxdrUM0FzepkgmBqNaLuBc8CZQXJ"
-    access_token_secret = "yVSDaGz4b2Y8bZ03eiEVJWKVmBnvriXqVfdQ4meptoEJ1"
-    consumer_key = "LPm15qCSlAKvVbCefyucvoIa5"
-    consumer_secret = "en8SmXnin790nH345cYdkdIu19C8XaZ3P4dcM8j42yDeuEUcYn"
+    access_token = "Your Access Token goes here"
+    access_token_secret = "Your Access Token Secret goes here"
+    consumer_key = "Your Consumer Key goes here"
+    consumer_secret = "Your Comsumer Secret goes here"
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     return auth
