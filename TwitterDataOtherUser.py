@@ -3,7 +3,7 @@ from tweepy import Cursor
 from TwitterMining import get_twitter_client
 
 if __name__ == '__main__':
-    user = "StellaFoxTrot"
+    user = "Any Twitter User"
     client = get_twitter_client()
 
     for status in Cursor(client.home_timeline).items(20):
