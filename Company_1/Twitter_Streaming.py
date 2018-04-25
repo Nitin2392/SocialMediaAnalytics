@@ -3,7 +3,7 @@ import string
 import time
 from tweepy import Stream
 from tweepy.streaming import StreamListener
-from TwitterMining import get_twitter_client
+from Company_1.TwitterMining import get_twitter_client
 
 class Custom_Listener(StreamListener):
     """
@@ -12,14 +12,28 @@ class Custom_Listener(StreamListener):
     def _init_(self, fname):
         safe_fname = format_filename(fname)
         self.outfile = "stream_output_%s.jsonl" %safe_fname
+
     def on_data(self, raw_data):
-        with open(self.outfile, 'a') as fi:
-            fi.write(raw_data)
+
+        try:
+            with open(self.outfile, 'a') as fi:
+                fi.write(raw_data)
+                return True
+        except BaseException as be:
+            sys.stderr.write("Error on_data : {} \n".format(be))
+            time.sleep(5)
+
         return True
+
+
     def on_error(self, status_code):
         if status_code == 420:
             sys.stderr.write("Rate Limit Exceeded")
-        return False
+            return False
+        else:
+            sys.stderr.write("Error {}\n".format(status_code))
+            return True
+
 
 def format_filename(fname):
         """
@@ -39,11 +53,10 @@ def convert_valid(one_char):
         else:
             return '_'
 
-if __name__=='__main__':
-    take_input = sys.argv[1:]
+if __name__== '__main__':
+    take_input = "ICO"
     take_input_fname = ' '.join(take_input)
     auth = get_twitter_client()
     twitter_stream = Stream(auth, Custom_Listener(take_input_fname))
-    twitter_stream.filter(track=take_input, async=True)
-
+    twitter_stream.filter()
 
