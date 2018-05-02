@@ -11,16 +11,19 @@ from tweepy import API
 
 # Personalized access tokens for obtaining data from Twitter
 def get_twitter_data():
+    # I have not specified any tokens here. Create a Twitter application and once the ID's are generated, substitute them here. 
     access_token = "Your Access Token goes here"
     access_token_secret = "Your Access Token Secret goes here"
     consumer_key = "Your Consumer Key goes here"
     consumer_secret = "Your Comsumer Secret goes here"
+    # Using OAuthHandler method and passing consumer key and secret followed by setting access token and secret
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     return auth
 
 def get_twitter_client():
     auth = get_twitter_data()
+    # Fetch Search API after user authentication
     client = API(auth)
     return client
 
