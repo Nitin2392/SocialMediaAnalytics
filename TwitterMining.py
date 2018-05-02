@@ -1,7 +1,12 @@
 # Trying to mine data about ICO's from Twitter
+
+# Tweepy will be primary library/package we will be using to connect to Twitter
 from tweepy.streaming import StreamListener
+# Need this to authentcate OAuthHandler which will be used for Authenticating User profiles
 from tweepy import OAuthHandler
+# In Case of streaming API 
 from tweepy import Stream
+# To invoke Twitter API 
 from tweepy import API
 
 # Personalized access tokens for obtaining data from Twitter
